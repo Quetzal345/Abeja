@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Algoritmo de Colonia de Abejas (ABC)</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>Algoritmo de Colonia de Abejas (ABC)</h1>
+      <p class="subtitle">Optimización por Inteligencia de Enjambre</p>
+    </div>
+
+    <div class="container">
+      <div class="controls">
+        <div class="control-group">
+          <label for="function">Función objetivo:</label>
+          <select id="function" class="form-control">
+            <option value="quadratic">f(x) = x² + 2x + 1</option>
+            <option value="rastrigin">f(x) = 10 + (x² - 10*cos(2πx))</option>
+            <option value="sphere">f(x) = x²</option>
+            <option value="rosenbrock">f(x,y) = (1-x)² + 100(y-x²)²</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="beeCount">Número de abejas:</label>
+          <input
+            type="number"
+            id="beeCount"
+            min="5"
+            max="100"
+            value="20"
+            class="form-control"
+          />
+        </div>
+
+        <div class="control-group">
+          <label for="maxIterations">Iteraciones máximas:</label>
+          <input
+            type="number"
+            id="maxIterations"
+            min="10"
+            max="1000"
+            value="100"
+            class="form-control"
+          />
+        </div>
+
+        <div class="control-group">
+          <label for="limit">Límite de intentos:</label>
+          <input
+            type="number"
+            id="limit"
+            min="1"
+            max="50"
+            value="5"
+            class="form-control"
+          />
+        </div>
+
+        <div class="range-controls">
+          <div class="control-group">
+            <label for="rangeMin">Rango mínimo:</label>
+            <input
+              type="number"
+              id="rangeMin"
+              value="-10"
+              class="form-control"
+            />
+          </div>
+          <div class="control-group">
+            <label for="rangeMax">Rango máximo:</label>
+            <input
+              type="number"
+              id="rangeMax"
+              value="10"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button id="runBtn" class="btn btn-run">Ejecutar Algoritmo</button>
+          <button id="stopBtn" class="btn btn-stop" disabled>Detener</button>
+          <button id="resetBtn" class="btn btn-reset">Reiniciar</button>
+        </div>
+
+        <div class="progress-container">
+          <label>Progreso:</label>
+          <progress id="progress" value="0" max="100"></progress>
+          <span id="progressText">0%</span>
+        </div>
+      </div>
+
+      <div class="visualization">
+        <div class="graph-container">
+          <canvas id="canvas"></canvas>
+          <div class="graph-legend">
+            <div class="legend-item">
+              <div class="legend-color function"></div>
+              <span>Función objetivo</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color bees"></div>
+              <span>Fuentes de alimento</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color best"></div>
+              <span>Mejor solución</span>
+            </div>
+          </div>
+          <div class="axis-label x-axis">Variable x</div>
+          <div class="axis-label y-axis">f(x)</div>
+        </div>
+
+        <div class="results">
+          <h3>Resultados</h3>
+          <div class="result-item">
+            <span class="result-label">Mejor solución:</span>
+            <span id="bestSolution" class="result-value">-</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Mejor aptitud:</span>
+            <span id="bestFitness" class="result-value">-</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Iteración actual:</span>
+            <span id="currentIteration" class="result-value">0/0</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Tiempo ejecución:</span>
+            <span id="executionTime" class="result-value">0.00s</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,342 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #e67e22;
+    --accent-color: #2ecc71;
+    --dark-color: #2c3e50;
+    --light-color: #ecf0f1;
+    --background-color: #f9f9f9;
+    --text-color: #333;
+    --border-color: #ddd;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: var(--dark-color);
+    text-align: center;
+    margin: 20px 0;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 2px;
+}
+
+h2, h3 {
+    color: var(--dark-color);
+    margin: 15px 0 10px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.controls {
+    flex: 1;
+    min-width: 320px;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.controls:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.visualization {
+    flex: 2;
+    min-width: 450px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.visualization:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid var(--border-color);
+}
+
+label {
+    display: block;
+    margin: 18px 0 8px;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 16px;
+    transition: var(--transition);
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    display: inline-block;
+    background: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+button:disabled {
+    background: #95a5a6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+#runBtn {
+    background: var(--success-color);
+}
+
+#runBtn:hover {
+    background: #219653;
+}
+
+#stopBtn {
+    background: var(--danger-color);
+}
+
+#stopBtn:hover {
+    background: #c0392b;
+}
+
+.results {
+    margin-top: 25px;
+    padding: 20px;
+    background: var(--light-color);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.results p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.progress-container {
+    margin: 25px 0;
+}
+
+progress {
+    width: 100%;
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #f0f0f0;
+    border-radius: 6px;
+}
+
+progress::-webkit-progress-value {
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 6px;
+}
+
+.function-selector {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .controls, .visualization {
+        min-width: 100%;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    button {
+        width: 100%;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.controls, .visualization {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.visualization {
+    animation-delay: 0.2s;
+}
+/* Mejoras para el canvas */
+.canvas-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    margin: 20px 0;
+    background: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+/* Leyenda del gráfico */
+.graph-legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+/* Ejes y cuadrícula */
+.axis-label {
+    position: absolute;
+    font-size: 12px;
+    color: #666;
+}
+
+.x-axis-label {
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.y-axis-label {
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+/* Tooltip para puntos */
+.bee-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    pointer-events: none;
+    z-index: 100;
+    transform: translate(-50%, -100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Animaciones */
+@keyframes beeMovement {
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(2px, 2px); }
+    100% { transform: translate(0, 0); }
+}
+
+.bee-point {
+    animation: beeMovement 1s infinite;
+}
